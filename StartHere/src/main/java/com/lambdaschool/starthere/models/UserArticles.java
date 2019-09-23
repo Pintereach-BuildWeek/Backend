@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "userarticles")
-public class UserArticles
+public class UserArticles extends Auditable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,7 +20,6 @@ public class UserArticles
     private String link;
 
     @Column(nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String category;
 
     @ManyToOne
@@ -68,4 +67,6 @@ public class UserArticles
     public void setUser(User user) {
         this.user = user;
     }
+
+
 }

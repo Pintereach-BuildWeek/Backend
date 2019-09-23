@@ -38,9 +38,9 @@ public class SeedData implements CommandLineRunner
         admins.add(new UserRoles(new User(), r2));
         admins.add(new UserRoles(new User(), r3));
         User u1 = new User("admin", "password", admins);
-        u1.getUserArticle()
+        u1.getUserArticles()
           .add(new UserArticles("http://link-1", "Java/Spring", u1));
-        u1.getUserArticle()
+        u1.getUserArticles()
           .add(new UserArticles("http://link-2", "Node/Express", u1));
 
         userService.save(u1);
@@ -50,9 +50,9 @@ public class SeedData implements CommandLineRunner
         datas.add(new UserRoles(new User(), r3));
         datas.add(new UserRoles(new User(), r2));
         User u2 = new User("cinnamon", "1234567", datas);
-        u2.getUserArticle()
+        u2.getUserArticles()
           .add(new UserArticles("http://link-2-1", "Java/Spring", u2));
-        u2.getUserArticle()
+        u2.getUserArticles()
           .add(new UserArticles("http://link-2-1", "Java/Spring", u2));
 //        u2.getUseremails()
 //          .add(new Useremail(u2, "bunny@email.local"));
@@ -62,7 +62,7 @@ public class SeedData implements CommandLineRunner
         ArrayList<UserRoles> users = new ArrayList<>();
         users.add(new UserRoles(new User(), r2));
         User u3 = new User("barnbarn", "ILuvM4th!", users);
-        u3.getUserArticle()
+        u3.getUserArticles()
           .add(new UserArticles("http://link-3-1", "REACT", u3));
         userService.save(u3);
 
