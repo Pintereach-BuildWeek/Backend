@@ -1,9 +1,6 @@
 package com.lambdaschool.starthere;
 
-import com.lambdaschool.starthere.models.Role;
-import com.lambdaschool.starthere.models.User;
-import com.lambdaschool.starthere.models.UserRoles;
-import com.lambdaschool.starthere.models.Useremail;
+import com.lambdaschool.starthere.models.*;
 import com.lambdaschool.starthere.services.RoleService;
 import com.lambdaschool.starthere.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,43 +37,44 @@ public class SeedData implements CommandLineRunner
         admins.add(new UserRoles(new User(), r1));
         admins.add(new UserRoles(new User(), r2));
         admins.add(new UserRoles(new User(), r3));
-        User u1 = new User("admin", "ILuvM4th!", admins);
-        u1.getUseremails()
-          .add(new Useremail(u1, "admin@email.local"));
-        u1.getUseremails()
-          .add(new Useremail(u1, "admin@mymail.local"));
-        u1 = userService.save(u1);
+        User u1 = new User("admin", "password", admins);
+        u1.getUserArticle()
+                .add(new UserArticles("http://link-1", "Java/Spring", u1));
+        u1.getUserArticle()
+                .add(new UserArticles("http://link-2", "Node/Express", u1));
+
+        userService.save(u1);
 
         // data, user
         ArrayList<UserRoles> datas = new ArrayList<>();
         datas.add(new UserRoles(new User(), r3));
         datas.add(new UserRoles(new User(), r2));
         User u2 = new User("cinnamon", "1234567", datas);
-        u2.getUseremails()
-          .add(new Useremail(u2, "cinnamon@mymail.local"));
-        u2.getUseremails()
-          .add(new Useremail(u2, "hops@mymail.local"));
-        u2.getUseremails()
-          .add(new Useremail(u2, "bunny@email.local"));
-        u2 = userService.save(u2);
+        u2.getUserArticle()
+                .add(new UserArticles("http://link-2-1", "Java/Spring", u2));
+        u2.getUserArticle()
+                .add(new UserArticles("http://link-2-1", "Java/Spring", u2));
+//        u2.getUseremails()
+//          .add(new Useremail(u2, "bunny@email.local"));
+        userService.save(u2);
 
         // user
         ArrayList<UserRoles> users = new ArrayList<>();
-        users.add(new UserRoles(new User(), r1));
-        User u3 = new User("testbarn", "ILuvM4th!", users);
-        u3.getUseremails()
-          .add(new Useremail(u3, "barnbarn@email.local"));
-        u3 = userService.save(u3);
+        users.add(new UserRoles(new User(), r2));
+        User u3 = new User("barnbarn", "ILuvM4th!", users);
+        u3.getUserArticle()
+                .add(new UserArticles("http://link-3-1", "REACT", u3));
+        userService.save(u3);
 
         users = new ArrayList<>();
         users.add(new UserRoles(new User(), r2));
-        User u4 = new User("testcat", "password", users);
-        u4 = userService.save(u4);
+        User u4 = new User("Bob", "password", users);
+        userService.save(u4);
 
         users = new ArrayList<>();
         users.add(new UserRoles(new User(), r2));
-        User u5 = new User("testdog", "password", users);
-        u5 = userService.save(u5);
+        User u5 = new User("Jane", "password", users);
+        userService.save(u5);
 
         System.out.println("\n*** Seed Data ***");
         System.out.println(u1);
