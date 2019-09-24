@@ -53,7 +53,7 @@ public class SeedData implements CommandLineRunner
         u2.getUserArticles()
           .add(new UserArticles("http://link-2-1", "Java/Spring", u2));
         u2.getUserArticles()
-          .add(new UserArticles("http://link-2-1", "Java/Spring", u2));
+          .add(new UserArticles("http://link-2-2", "postgreSQL", u2));
 //        u2.getUseremails()
 //          .add(new Useremail(u2, "bunny@email.local"));
         userService.save(u2);

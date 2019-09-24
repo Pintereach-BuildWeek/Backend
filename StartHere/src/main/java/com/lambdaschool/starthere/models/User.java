@@ -51,7 +51,11 @@ public class User extends Auditable
             ur.setUser(this);
         }
         this.userroles = userRoles;
-//        this.userarticles = userarticles;
+//        for (UserArticles ua : useArticles)
+//        {
+//            ua.setUser(this);
+//        }
+//        this.userarticles = useArticles;
     }
 
     public long getUserid()
@@ -104,8 +108,8 @@ public class User extends Auditable
         return userarticles;
     }
 
-    public void setUserArticles(List<UserArticles> userArticle) {
-        this.userarticles = userArticle;
+    public void setUserArticles(List<UserArticles> userarticles) {
+        this.userarticles = userarticles;
     }
 
     public List<SimpleGrantedAuthority> getAuthority()

@@ -1,11 +1,11 @@
 package com.lambdaschool.starthere.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "userarticles")
@@ -22,9 +22,10 @@ public class UserArticles extends Auditable
     @Column(nullable = false)
     private String category;
 
-    @ManyToOne
-    @JoinColumn(name = "userid")
-    @JsonIgnoreProperties("userarticles")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userid",
+            nullable = false)
+    @JsonIgnoreProperties("userArticles")
     private User user;
 
     public UserArticles() {
@@ -68,5 +69,19 @@ public class UserArticles extends Auditable
         this.user = user;
     }
 
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(getUser());
+    }
 
+    @Override
+    public String toString() {
+        return "UserArticles{" +
+                "articleid=" + articleid +
+                ", link='" + link + '\'' +
+                ", category='" + category + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }
