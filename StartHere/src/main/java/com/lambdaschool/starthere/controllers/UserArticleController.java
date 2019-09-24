@@ -70,7 +70,7 @@ public class UserArticleController
         return new ResponseEntity<>(ua, HttpStatus.OK);
     }
 
-    //POST --/articles/createnewarticle
+    //POST localhost:2019/articles/createnewarticle
 
     @PostMapping(value = "/createnewarticle",
             consumes = {"application/json"},
@@ -92,14 +92,30 @@ public class UserArticleController
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
-    //DELETE
+    //PUT
 
-    @DeleteMapping("/article/{articleId}")
-    public ResponseEntity<?> deleteArticleById(HttpServletRequest request, @PathVariable long id)
+    @PutMapping(value = "/edit/{articleId}")
+    public ResponseEntity<?> updateArticle(HttpServletRequest request,
+                                        @RequestBody
+                                                UserArticles updateArticle,
+                                        @PathVariable
+                                                Long articleId)
+    {
+        logger.trace(request.getMethod()
+                .toUpperCase() + " " + request.getRequestURI() + " accessed");
+
+        articleService.update(updateArticle, articleId, request.isUserInRole("ADMIN"));
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    //DELETE localhost:2019/articles/4
+
+    @DeleteMapping("/{articleId}")
+    public ResponseEntity<?> deleteArticleById(HttpServletRequest request, @PathVariable Long articleId)
     {
         logger.trace(request.getMethod()
                             .toUpperCase() + " " + request.getRequestURI() + " accessed");
-        articleService.delete(id);
+        articleService.delete(articleId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
