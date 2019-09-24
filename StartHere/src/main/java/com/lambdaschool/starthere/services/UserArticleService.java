@@ -18,4 +18,6 @@ public interface UserArticleService
 
     UserArticles findByName(String name);
 
+    List<UserArticles> findByUserName(String username);
+
 }
