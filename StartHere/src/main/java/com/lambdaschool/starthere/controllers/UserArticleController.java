@@ -91,5 +91,15 @@ public class UserArticleController
         responseHeaders.setLocation(newArticleURI);
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
-    
+
+    //DELETE
+
+    @DeleteMapping("/article/{articleId}")
+    public ResponseEntity<?> deleteArticleById(HttpServletRequest request, @PathVariable long id)
+    {
+        logger.trace(request.getMethod()
+                            .toUpperCase() + " " + request.getRequestURI() + " accessed");
+        articleService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
