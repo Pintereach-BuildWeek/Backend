@@ -2,18 +2,22 @@ package com.lambdaschool.starthere.controllers;
 
 import com.lambdaschool.starthere.models.UserArticles;
 import com.lambdaschool.starthere.models.Useremail;
+import com.lambdaschool.starthere.repository.UserArticleRepository;
 import com.lambdaschool.starthere.services.UserArticleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -65,4 +69,27 @@ public class UserArticleController
         List<UserArticles> ua = articleService.findByUserName(username);
         return new ResponseEntity<>(ua, HttpStatus.OK);
     }
+
+    //POST --/articles/createnewarticle
+
+    @PostMapping(value = "/createnewarticle",
+            consumes = {"application/json"},
+            produces = {"application/json"})
+    public ResponseEntity<?> addNewArticle(HttpServletRequest request, @Valid @RequestBody UserArticles newarticle) throws URISyntaxException
+    {
+        logger.trace(request.getMethod().toUpperCase( )+ " " + request.getRequestURI() + "accessed");
+
+        newarticle = articleService.save(newarticle);
+
+        //set the location header for the newly created article
+        HttpHeaders responseHeaders = new HttpHeaders();
+        URI newArticleURI = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/articles")
+                .buildAndExpand(
+                        newarticle.getArticleid())
+                .toUri();
+        responseHeaders.setLocation(newArticleURI);
+        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
+    }
+    
 }
