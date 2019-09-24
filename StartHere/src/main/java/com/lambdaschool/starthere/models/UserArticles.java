@@ -22,7 +22,7 @@ public class UserArticles extends Auditable
     @Column(nullable = false)
     private String category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "userid",
             nullable = false)
     @JsonIgnoreProperties("userarticles")
