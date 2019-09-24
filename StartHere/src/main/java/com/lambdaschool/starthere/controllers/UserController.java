@@ -29,7 +29,6 @@ public class UserController
     @Autowired
     private UserService userService;
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping(value = "/users",
                 produces = {"application/json"})
     public ResponseEntity<?> listAllUsers(HttpServletRequest request)
@@ -41,8 +40,6 @@ public class UserController
         return new ResponseEntity<>(myUsers, HttpStatus.OK);
     }
 
-
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping(value = "/user/{userId}",
                 produces = {"application/json"})
     public ResponseEntity<?> getUserById(HttpServletRequest request,
@@ -56,8 +53,6 @@ public class UserController
         return new ResponseEntity<>(u, HttpStatus.OK);
     }
 
-
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping(value = "/user/name/{userName}",
                 produces = {"application/json"})
     public ResponseEntity<?> getUserByName(HttpServletRequest request,
@@ -71,7 +66,6 @@ public class UserController
         return new ResponseEntity<>(u, HttpStatus.OK);
     }
 
-
     @GetMapping(value = "/getusername",
                 produces = {"application/json"})
     @ResponseBody
@@ -83,8 +77,6 @@ public class UserController
         return new ResponseEntity<>(authentication.getPrincipal(), HttpStatus.OK);
     }
 
-
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping(value = "/user",
                  consumes = {"application/json"},
                  produces = {"application/json"})
@@ -123,8 +115,6 @@ public class UserController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @DeleteMapping("/user/{id}")
     public ResponseEntity<?> deleteUserById(HttpServletRequest request,
                                             @PathVariable
@@ -137,7 +127,6 @@ public class UserController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @DeleteMapping("/user/{userid}/role/{roleid}")
     public ResponseEntity<?> deleteUserRoleByIds(HttpServletRequest request,
                                                  @PathVariable
@@ -153,7 +142,6 @@ public class UserController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/user/{userid}/role/{roleid}")
     public ResponseEntity<?> postUserRoleByIds(HttpServletRequest request,
                                                @PathVariable

@@ -2,11 +2,9 @@ package com.lambdaschool.starthere.services;
 
 import com.lambdaschool.starthere.exceptions.ResourceFoundException;
 import com.lambdaschool.starthere.exceptions.ResourceNotFoundException;
-import com.lambdaschool.starthere.models.Role;
-import com.lambdaschool.starthere.models.User;
-import com.lambdaschool.starthere.models.UserRoles;
-import com.lambdaschool.starthere.models.Useremail;
+import com.lambdaschool.starthere.models.*;
 import com.lambdaschool.starthere.repository.RoleRepository;
+import com.lambdaschool.starthere.repository.UserArticleRepository;
 import com.lambdaschool.starthere.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -30,6 +28,9 @@ public class UserServiceImpl implements UserDetailsService, UserService
 
     @Autowired
     private RoleRepository rolerepos;
+
+    @Autowired
+    private UserArticleRepository userarticlerepos;
 
     @Transactional
     @Override
@@ -102,11 +103,10 @@ public class UserServiceImpl implements UserDetailsService, UserService
             newRoles.add(new UserRoles(newUser, ur.getRole()));
         }
         newUser.setUserroles(newRoles);
-
-        for (Useremail ue : user.getUseremails())
+        
+        for (UserArticles ua : user.getUserArticles())
         {
-            newUser.getUseremails()
-                   .add(new Useremail(newUser, ue.getUseremail()));
+            newUser.getUserArticles().add(new UserArticles(ua.getLink(), ua.getCategory(), newUser));
         }
 
         return userrepos.save(newUser);
@@ -139,15 +139,15 @@ public class UserServiceImpl implements UserDetailsService, UserService
                 throw new ResourceFoundException("User Roles are not updated through User");
             }
 
-            if (user.getUseremails()
-                    .size() > 0)
-            {
-                for (Useremail ue : user.getUseremails())
-                {
-                    currentUser.getUseremails()
-                               .add(new Useremail(currentUser, ue.getUseremail()));
-                }
-            }
+//            if (user.getUseremails()
+//                    .size() > 0)
+//            {
+//                for (Useremail ue : user.getUseremails())
+//                {
+//                    currentUser.getUseremails()
+//                               .add(new Useremail(currentUser, ue.getUseremail()));
+//                }
+//            }
 
             return userrepos.save(currentUser);
         } else
@@ -193,4 +193,6 @@ public class UserServiceImpl implements UserDetailsService, UserService
             throw new ResourceFoundException("Role and User Combination Already Exists");
         }
     }
+
+
 }
