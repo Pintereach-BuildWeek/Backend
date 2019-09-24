@@ -25,7 +25,7 @@ public class UserArticles extends Auditable
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid",
             nullable = false)
-    @JsonIgnoreProperties("userArticles")
+    @JsonIgnoreProperties("userarticles")
     private User user;
 
     public UserArticles() {

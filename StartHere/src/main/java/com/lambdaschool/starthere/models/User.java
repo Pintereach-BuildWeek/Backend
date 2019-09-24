@@ -89,6 +89,14 @@ public class User extends Auditable
         this.password = passwordEncoder.encode(password);
     }
 
+    public List<UserArticles> getUserarticles() {
+        return userarticles;
+    }
+
+    public void setUserarticles(List<UserArticles> userarticles) {
+        this.userarticles = userarticles;
+    }
+
     public void setPasswordNoEncrypt(String password)
     {
         this.password = password;
@@ -104,13 +112,13 @@ public class User extends Auditable
         this.userroles = userroles;
     }
 
-    public List<UserArticles> getUserArticles() {
-        return userarticles;
-    }
-
-    public void setUserArticles(List<UserArticles> userarticles) {
-        this.userarticles = userarticles;
-    }
+//    public List<UserArticles> getUserArticles() {
+//        return userarticles;
+//    }
+//
+//    public void setUserArticles(List<UserArticles> userarticles) {
+//        this.userarticles = userarticles;
+//    }
 
     public List<SimpleGrantedAuthority> getAuthority()
     {
