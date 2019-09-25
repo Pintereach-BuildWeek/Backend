@@ -23,6 +23,12 @@ public class UserArticleServiceImpl implements UserArticleService
     UserRepository userrepos;
 
     @Override
+    public UserArticles update(UserArticles user, long id, boolean isAdmin)
+    {
+        return null;
+    }
+
+    @Override
     public List<UserArticles> findAll() {
         List<UserArticles> articles = new ArrayList<>();
         userarticlerepos.findAll().iterator().forEachRemaining(articles::add);

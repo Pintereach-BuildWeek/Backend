@@ -16,6 +16,8 @@ public interface UserArticleService
 
     UserArticles save(UserArticles userarticle);
 
+    UserArticles update(UserArticles user, long id, boolean isAdmin);
+
     UserArticles findByName(String name);
 
     List<UserArticles> findByUserName(String username);
