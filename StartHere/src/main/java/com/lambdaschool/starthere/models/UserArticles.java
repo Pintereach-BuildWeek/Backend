@@ -18,6 +18,9 @@ public class UserArticles extends Auditable
     @Column(nullable = false, unique =  true)
     private String title;
 
+    @Column(nullable = false)
+    private String summary;
+
     @Column(nullable = false,
             unique = true)
     private String link;
@@ -34,8 +37,9 @@ public class UserArticles extends Auditable
     public UserArticles() {
     }
 
-    public UserArticles(String title, String link, String category, User user) {
+    public UserArticles(String title, String summary, String link, String category, User user) {
         this.title = title;
+        this.summary = summary;
         this.link = link;
         this.category = category;
         this.user = user;
@@ -83,6 +87,14 @@ public class UserArticles extends Auditable
         this.title = title;
     }
 
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
     @Override
     public int hashCode()
     {
@@ -93,16 +105,7 @@ public class UserArticles extends Auditable
     public String toString()
     {
         return "UserArticles{" + "articleid=" + articleid +
-                ", title='" + title + '\'' + ", category = '" + category + '\'' + ", user=" + user + '}';
+                ", title='" + title + '\'' + ", summary='" + summary + '\'' + ", category = '" + category + '\'' + ", user=" + user + '}';
     }
 
-    //    @Override
-//    public String toString() {
-//        return "UserArticles{" +
-//                "articleid=" + articleid +
-//                ", link='" + link + '\'' +
-//                ", category='" + category + '\'' +
-//                ", user=" + user +
-//                '}';
-//    }
 }
