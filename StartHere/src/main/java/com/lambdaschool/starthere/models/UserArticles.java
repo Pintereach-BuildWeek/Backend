@@ -15,6 +15,9 @@ public class UserArticles extends Auditable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long articleid;
 
+    @Column(nullable = false, unique =  true)
+    private String title;
+
     @Column(nullable = false,
             unique = true)
     private String link;
@@ -31,7 +34,8 @@ public class UserArticles extends Auditable
     public UserArticles() {
     }
 
-    public UserArticles(String link, String category, User user) {
+    public UserArticles(String title, String link, String category, User user) {
+        this.title = title;
         this.link = link;
         this.category = category;
         this.user = user;
@@ -69,6 +73,16 @@ public class UserArticles extends Auditable
         this.user = user;
     }
 
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+
     @Override
     public int hashCode()
     {
@@ -76,12 +90,19 @@ public class UserArticles extends Auditable
     }
 
     @Override
-    public String toString() {
-        return "UserArticles{" +
-                "articleid=" + articleid +
-                ", link='" + link + '\'' +
-                ", category='" + category + '\'' +
-                ", user=" + user +
-                '}';
+    public String toString()
+    {
+        return "UserArticles{" + "articleid=" + articleid +
+                ", title='" + title + '\'' + ", category = '" + category + '\'' + ", user=" + user + '}';
     }
+
+    //    @Override
+//    public String toString() {
+//        return "UserArticles{" +
+//                "articleid=" + articleid +
+//                ", link='" + link + '\'' +
+//                ", category='" + category + '\'' +
+//                ", user=" + user +
+//                '}';
+//    }
 }
