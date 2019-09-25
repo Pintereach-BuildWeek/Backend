@@ -74,4 +74,10 @@ public class UserArticleServiceImpl implements UserArticleService
     public List<UserArticles> findByUserName(String username) {
         return userarticlerepos.findAllByUser_Username(username);
     }
+
+    @Override
+    public List<UserArticles> findByCategoryName(String category)
+    {
+        return userarticlerepos.findAllByCategory(category);
+    }
 }

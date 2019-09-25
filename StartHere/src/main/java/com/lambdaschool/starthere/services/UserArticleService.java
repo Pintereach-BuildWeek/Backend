@@ -1,5 +1,6 @@
 package com.lambdaschool.starthere.services;
 
+import com.lambdaschool.starthere.models.User;
 import com.lambdaschool.starthere.models.UserArticles;
 
 import java.util.List;
@@ -21,5 +22,7 @@ public interface UserArticleService
     UserArticles findByName(String name);
 
     List<UserArticles> findByUserName(String username);
+
+    List<UserArticles> findByCategoryName(String category);
 
 }
