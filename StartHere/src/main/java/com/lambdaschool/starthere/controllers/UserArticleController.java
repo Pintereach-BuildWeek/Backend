@@ -70,6 +70,19 @@ public class UserArticleController
         return new ResponseEntity<>(ua, HttpStatus.OK);
     }
 
+    //GET localhost:2019/articles/{category}
+    @GetMapping(value = "/{category}",
+                produces = {"application/json"})
+    public ResponseEntity<?> findArticleByCategoryName(HttpServletRequest request,
+                                                       @PathVariable
+                                                            String category)
+    {
+        logger.trace(request.getMethod()
+                            .toUpperCase() + " " + request.getRequestURI() + " accessed");
+        List<UserArticles> ua = articleService.findByCategoryName(category);
+        return new ResponseEntity<>(ua, HttpStatus.OK);
+    }
+
     //POST localhost:2019/articles/createnewarticle
 
     @PostMapping(value = "/createnewarticle",
