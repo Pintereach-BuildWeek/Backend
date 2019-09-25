@@ -106,7 +106,7 @@ public class UserServiceImpl implements UserDetailsService, UserService
         
         for (UserArticles ua : user.getUserarticles())
         {
-            newUser.getUserarticles().add(new UserArticles(ua.getTitle(), ua.getLink(), ua.getCategory(), newUser));
+            newUser.getUserarticles().add(new UserArticles(ua.getTitle(), ua.getSummary(),ua.getLink(), ua.getCategory(), newUser));
         }
 
         return userrepos.save(newUser);
